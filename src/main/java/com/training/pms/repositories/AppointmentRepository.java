@@ -6,5 +6,7 @@ import com.training.pms.model.Appointment;
 import com.training.pms.model.Patient;
 
 public interface AppointmentRepository extends CrudRepository<Appointment, Integer>{
-
+	
 }
+
+

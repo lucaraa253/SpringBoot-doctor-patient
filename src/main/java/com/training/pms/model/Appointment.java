@@ -3,6 +3,7 @@ package com.training.pms.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,11 +36,8 @@ public class Appointment {
     
     private String time;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="patient_id")
-    private Patient patient;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="doctor_id")
-    private Doctor doctor;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "patient_id",referencedColumnName="patientId")
+	@JsonIgnoreProperties("storyList")
+	private Patient patient;
 }
